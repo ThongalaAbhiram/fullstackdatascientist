@@ -1,0 +1,79 @@
+/* Main App Background */
+.stApp {
+    background: linear-gradient(to right, #eef2f3, #dfe9f3);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Title Styling */
+h1 {
+    color: #1f4e79;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* Subheaders */
+h2, h3 {
+    color: #2e75b6;
+}
+
+/* Sidebar Styling */
+section[data-testid="stSidebar"] {
+    background-color: #1f2937;
+    color: white;
+}
+
+/* Sidebar text */
+section[data-testid="stSidebar"] .css-1d391kg {
+    color: white;
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.stButton > button:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Input boxes */
+.stNumberInput input,
+.stTextInput input {
+    border-radius: 8px;
+    border: 2px solid #93c5fd;
+    padding: 8px;
+}
+
+/* Prediction Result Box */
+.result-box {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Dataframe Styling */
+[data-testid="stDataFrame"] {
+    border: 2px solid #93c5fd;
+    border-radius: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: gray;
+    margin-top: 30px;
+    font-size: 14px;
+}
