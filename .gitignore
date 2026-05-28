@@ -1,0 +1,11 @@
+tfenv/
+venv/
+env/
+DL/tfenv/
+
+*.dll
+
+
+
+__pycache__/
+.ipynb_checkpoints/

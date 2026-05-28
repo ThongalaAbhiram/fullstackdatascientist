@@ -1,0 +1,4 @@
+train_id,route,num_coaches,platform,weekend,delay_minutes,passenger_count
+10,1,9,2,0,3,350
+12,4,21,6,1,14,890
+1,1,12,3,0,10,500

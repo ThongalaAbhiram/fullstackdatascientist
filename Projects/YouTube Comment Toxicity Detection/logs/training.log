@@ -1,0 +1,10 @@
+2026-05-25 01:55:16,253:INFO:Loading Dataset
+2026-05-25 01:55:16,866:INFO:Cleaning Text
+2026-05-25 01:55:32,428:INFO:Vectorizing Data
+2026-05-25 01:55:43,407:INFO:Training Model
+2026-05-25 01:55:44,130:INFO:Artifacts Saved
+2026-05-25 02:03:56,684:INFO:Loading Dataset
+2026-05-25 02:03:57,276:INFO:Cleaning Text
+2026-05-25 02:04:25,111:INFO:Vectorizing Data
+2026-05-25 02:04:36,313:INFO:Training Model
+2026-05-25 02:04:36,939:INFO:Artifacts Saved

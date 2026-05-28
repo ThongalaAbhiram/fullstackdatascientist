@@ -1,0 +1,18 @@
+LinearRegression:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/LinearRegression
+https://fullstackdatascientist-ltn2fpjmx8lnqeyzrnxebg.streamlit.app/
+
+Logistic:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/LogisticRegression
+https://fullstackdatascientist-o2lc6ski8qzgdjpbrrakll.streamlit.app/
+
+Svm:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/SVM
+https://fullstackdatascientist-wylzbd77cqpkyekdurfsj4.streamlit.app/
+Svm Reg:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/SVM_Regression
+https://fullstackdatascientist-c2bvbuwjpjvmqbpkxsftlu.streamlit.app/
