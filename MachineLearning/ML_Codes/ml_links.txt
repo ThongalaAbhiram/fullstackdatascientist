@@ -16,3 +16,53 @@ Svm Reg:
 
 https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/SVM_Regression
 https://fullstackdatascientist-c2bvbuwjpjvmqbpkxsftlu.streamlit.app/
+
+
+DT_regressor:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/DTreeRegressor
+https://fullstackdatascientist-dvgbwcy3mh8hs2bkdloly2.streamlit.app/
+
+DT_Classifier:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/DecTreeClassifier
+https://fullstackdatascientist-58esx36qmexojv9znmxplz.streamlit.app/
+
+Knn Classifier:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/KnnRegressor
+https://fullstackdatascientist-9uagptn2pqsvqpaz7dwqh8.streamlit.app/
+
+Knn Regressors:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/KnnRegressor
+https://fullstackdatascientist-cjvbi78f3onnyht6dw9uve.streamlit.app/
+
+RandomForest Classifier:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/RandomForestClassifier
+https://fullstackdatascientist-dd6qc2urcokua5wdytglj8.streamlit.app/
+
+RandomForestRegressor:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/RandomForestRegressor
+https://fullstackdatascientist-khtwf8jsdmyuqyy2ybocrk.streamlit.app/
+
+Adaboost classifier:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/AdaboostClassifier
+https://fullstackdatascientist-txnlyc3l8ofgc5vly7gktj.streamlit.app/
+Adaboost Regressor:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/AdaboostRegressor
+https://fullstackdatascientist-gs3vha9i7igyjvssvcsmdx.streamlit.app/
+
+Stacking Classifier:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/StackingClassifier
+https://fullstackdatascientist-jedbdc7svyw9uyz7rqe4od.streamlit.app/
+
+Stacking Regressor:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/StackingRegressor
+https://fullstackdatascientist-zwunrmh5plrz9mjsp3pkf4.streamlit.app/
