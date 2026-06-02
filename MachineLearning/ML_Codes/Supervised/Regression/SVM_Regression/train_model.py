@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
 from sklearn.metrics import r2_score
 
 # =========================
@@ -18,7 +18,7 @@ os.makedirs(model_dir, exist_ok=True)
 
 model_path = os.path.join(
     model_dir,
-    "linear_regression.pkl"
+    "svm_regressor.pkl"
 )
 
 scaler_path = os.path.join(
@@ -59,10 +59,14 @@ X_test_scaled = scaler.transform(X_test)
 # =========================
 # MODEL
 # =========================
-model = LinearRegression()
+model = SVR(
+    kernel="rbf",
+    C=100,
+    gamma="scale"
+)
 
 # =========================
-# TRAIN
+# TRAIN MODEL
 # =========================
 model.fit(
     X_train_scaled,

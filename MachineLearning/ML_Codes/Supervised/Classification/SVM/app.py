@@ -1,219 +1,109 @@
 import streamlit as st
-import pandas as pd
 import numpy as np
 import os
-import seaborn as sns
-import matplotlib.pyplot as plt
-import requests
+import joblib
 
-from datetime import datetime
-from sklearn.svm import SVC
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.metrics import accuracy_score,confusion_matrix
-
-#logger
-
-def log(messsage):
-    timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{timestamp}]{messsage}")
-
-
-#session state Intialization 
-if "cleaned_data" not in st.session_state:
-    st.session_state.cleaned_saved=False
-
-#Folder Setup 
-BASE_DIR=os.path.dirname(os.path.abspath(__file__))
-RAW_DIR=os.path.join(BASE_DIR,"data","raw")
-CLEAN_DIR=os.path.join(BASE_DIR,"data","cleaned")
-
-os.makedirs(RAW_DIR,exist_ok=True)
-os.makedirs(CLEAN_DIR,exist_ok=True)
-
-log("Application Started")
-log(f"RAW_DIR={RAW_DIR}")
-log(f"CLEAN_DIR={CLEAN_DIR}")
-
-#PAGE CONFIGURATION
+# Page Config
 st.set_page_config(
-    "End-to-End SVM",
-    layout="wide",
+    page_title="SVM Classifier",
+    page_icon="🩺",
+    layout="centered"
 )
-st.title("End-to-End Application")
 
-#sidebar
+# Paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-st.sidebar.title("SVM Settings")
-kernel=st.sidebar.selectbox("kernel",["linear","rbf","poly","sigmoid"])
-C=st.sidebar.slider("C(Regularization)",0.01,10.0,1.0)
-gamma=st.sidebar.selectbox("Gamma",["scale","auto"])
+model_path = os.path.join(
+    BASE_DIR,
+    "models",
+    "svm_classifier.pkl"
+)
 
-log(f"SVM Settings:kernel={kernel},C={C},gamma={gamma}")
+scaler_path = os.path.join(
+    BASE_DIR,
+    "models",
+    "scaler.pkl"
+)
 
-#Step 1:Data Ingestion
-st.header("Step 1:Data Ingestion")
-log("Step 1:Data Ingestion Started")
+# Load Model
+model = joblib.load(model_path)
+scaler = joblib.load(scaler_path)
 
-option=st.radio("Choose Data Source",["Download Dataset","Upload CSV"])
+# Title
+st.title("🩺 SVM Classifier")
+st.subheader("Breast Cancer Prediction")
 
-df=None
-raw_path=None
+st.write("---")
 
-if option=="Download Dataset":
-    if st.button("Download Iris Dataset"):
-        log("Downloading Iris Dataset")
-        url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+# Inputs
+radius = st.slider(
+    "Mean Radius",
+    5.0, 30.0, 14.0
+)
 
-        response=requests.get(url)
-        raw_path=os.path.join(RAW_DIR,"iris.csv")
-        with open(raw_path,"wb") as f:
-            f.write(response.content)
+texture = st.slider(
+    "Mean Texture",
+    5.0, 40.0, 20.0
+)
 
-        df=pd.read_csv(raw_path)
-        st.success("Dataset Downloaded Successfully")
-        log(f"Iris Dataset saved at {raw_path}")
+perimeter = st.slider(
+    "Mean Perimeter",
+    40.0, 200.0, 90.0
+)
 
-if option=="Upload CSV":
-    upload_file=st.file_uploader("upload your CSV file",type=["csv"])
-    if upload_file:
-        raw_path=os.path.join(RAW_DIR,upload_file.name)
-        with open(raw_path,"wb") as f:
-            f.write(upload_file.getbuffer())
+area = st.slider(
+    "Mean Area",
+    100.0, 2500.0, 500.0
+)
 
-        df=pd.read_csv(raw_path)
-        st.success("File Uploaded Successfully")
-        log(f"Uploaded data saved at {raw_path}")
-        
-#===========================================
+smoothness = st.slider(
+    "Mean Smoothness",
+    0.05, 0.20, 0.10
+)
 
-#Step 2:EDA
-if df is not None:
-    st.header("Step 2:Exploratory Data Analysis (EDA)")
-    log("Step 2:EDA Started")
+# Input Data
+input_data = np.array([
+    [
+        radius,
+        texture,
+        perimeter,
+        area,
+        smoothness
+    ]
+])
 
-    st.dataframe(df.head())
-    st.write("Shape of the dataset:",df.shape)
-    st.write("Missing values:",df.isnull().sum())
+# Remaining Features
+remaining_features = np.zeros((1, 25))
 
-    fig,ax=plt.subplots()
-    sns.heatmap(df.corr(numeric_only=True),annot=True,cmap="coolwarm",ax=ax)
-    st.pyplot(fig)
+input_data = np.concatenate(
+    [input_data, remaining_features],
+    axis=1
+)
 
-    log("Step 2:EDA Completed")
+# Scaling
+input_scaled = scaler.transform(
+    input_data
+)
 
-#=========================
+# Prediction
+if st.button("Predict"):
 
-#Step 3:Data Cleaning
+    prediction = model.predict(
+        input_scaled
+    )[0]
 
-if df is not None:
-    st.header("Step 3:Data Cleaning ")
-    Strategy=st.selectbox("Missing Value Strategy",["Mean","Median","Drop Rows"])
+    probability = model.predict_proba(
+        input_scaled
+    )[0]
 
-    df_clean= df.copy()
-
-    if Strategy=="Drop Rows":
-        df_clean=df_clean.dropna()
-
+    if prediction == 1:
+        st.success("✅ Benign Tumor")
     else:
-        for col in df_clean.select_dtypes(include=np.number):
-            if Strategy=="Mean":
-                df_clean[col]=df_clean[col].fillna(df_clean[col].mean())
-            else:
-                df_clean[col]=df_clean[col].fillna(df_clean[col].median())
+        st.error("⚠️ Malignant Tumor")
 
-    st.session_state.df_clean=df_clean
-    st.success("Data Cleaning Completed")
-else:
-    st.info("Please Complete Step 1 (Data Ingestion ) first....")
+    st.write(
+        f"Confidence: {max(probability)*100:.2f}%"
+    )
 
-#Step 4:Save Cleaned Data
-
-if st.button("Save Cleaned Data"):
-
-    if st.session_state.df_clean is None:
-        st.error("No cleaned data found.Please complete Step 3 First..")
-
-    else:
-        time_stamp=datetime.now().strftime("%Y%m%d_%H%M%S")
-        clean_filename=f"cleaned_data_{time_stamp}.csv"
-        clean_path=os.path.join(CLEAN_DIR,clean_filename)
-
-        st.session_state.df_clean.to_csv(clean_path,index=False)
-        st.success(f"Cleaned Data saved ")
-        st.info(f"Saved at : {clean_path}")
-        log(f"Cleaned data saved at {clean_path}")
-
-#============================
-
-#Step 5:Load Cleaned Data
-
-
-st.header("Step 5:Load Cleaned Data")
-clean_files=os.listdir(CLEAN_DIR)
-
-if not clean_files:
-    st.warning("No cleaned dataset found. Please save one in step 4.")
-    log("No cleaned dataset available ")
-else:
-    selected=st.selectbox("Select Cleaned Dataset",clean_files)
-    df_model=pd.read_csv(os.path.join(CLEAN_DIR,selected))
-
-    st.success(f"Loaded dataset: {selected}")
-    log(f"Loaded cleaned dataset:{selected}")
-
-    st.dataframe(df_model.head())
-
-#=========================
-
-#Step 6:Train Svm
-
-st.header("Step 6:Train SVM Model")
-log("Step 6 Started:SVM Training")
-target=st.selectbox("Select Target Column",df_model.columns)
-y=df_model[target]
-
-if y.dtype=="object":
-    y=LabelEncoder().fit_transform(y)
-    log("Target Column Encoded")
-
-#Select numeric features only
-
-x=df_model.drop(columns=[target])
-x=x.select_dtypes(include=np.number)
-
-if x.empty:
-    st.error("No Numeric Features available for training")
-    st.stop()
-
-#Scale features
-scaler=StandardScaler()
-x=scaler.fit_transform(x)
-
-#Train-test split
-X_train,X_test,y_train,y_test=train_test_split(x,y,test_size=0.25,random_state=42)
-
-#svm 
-model=SVC(kernel=kernel,C=C,gamma=gamma)
-model.fit(X_train,y_train)
-
-#Evaluate
-y_pred=model.predict(X_test)
-acc=accuracy_score(y_test,y_pred)
-
-st.success(f"SVM Model Trained Successfully with accuracy: {acc*100:.2f}%")
-log(f"SVM Training Completed with accuracy: {acc*100:.2f}%")
-
-cm=confusion_matrix(y_test,y_pred)
-fig,ax=plt.subplots()
-sns.heatmap(cm,annot=True,fmt="d",cmap="Blues",ax=ax)
-st.pyplot(fig)
-
-
-
-
-
-
-
-
-
+st.write("---")
+st.caption("Built using SVM Classification")

@@ -2,11 +2,11 @@ import os
 import joblib
 import pandas as pd
 
-from sklearn.datasets import fetch_california_housing
+from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
 # =========================
 # BASE DIRECTORY
@@ -18,7 +18,7 @@ os.makedirs(model_dir, exist_ok=True)
 
 model_path = os.path.join(
     model_dir,
-    "linear_regression.pkl"
+    "logistic_regression.pkl"
 )
 
 scaler_path = os.path.join(
@@ -29,14 +29,14 @@ scaler_path = os.path.join(
 # =========================
 # LOAD DATASET
 # =========================
-housing = fetch_california_housing()
+data = load_breast_cancer()
 
 X = pd.DataFrame(
-    housing.data,
-    columns=housing.feature_names
+    data.data,
+    columns=data.feature_names
 )
 
-y = housing.target
+y = data.target
 
 # =========================
 # TRAIN TEST SPLIT
@@ -59,10 +59,12 @@ X_test_scaled = scaler.transform(X_test)
 # =========================
 # MODEL
 # =========================
-model = LinearRegression()
+model = LogisticRegression(
+    max_iter=1000
+)
 
 # =========================
-# TRAIN
+# TRAIN MODEL
 # =========================
 model.fit(
     X_train_scaled,
@@ -76,12 +78,12 @@ y_pred = model.predict(
     X_test_scaled
 )
 
-score = r2_score(
+accuracy = accuracy_score(
     y_test,
     y_pred
 )
 
-print(f"R2 Score: {score:.4f}")
+print(f"Accuracy: {accuracy:.4f}")
 
 # =========================
 # SAVE MODEL

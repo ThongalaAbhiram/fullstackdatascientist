@@ -1,219 +1,127 @@
 import streamlit as st
-import seaborn as sns
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
+import os
+import joblib
 
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (
-    accuracy_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    confusion_matrix
+# =========================
+# PAGE CONFIG
+# =========================
+st.set_page_config(
+    page_title="Logistic Regression",
+    page_icon="🩺",
+    layout="centered"
 )
 
-# Page Config
-st.set_page_config(page_title="Logistic Regression", layout="centered")
+# =========================
+# PATHS
+# =========================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Load CSS
-def load_css(file):
-    with open(file) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-load_css("style.css")
-
-# Title
-st.markdown("""
-<div class="card">
-<h1>Logistic Regression</h1>
-<p>Predict whether a passenger <b>Survived</b> or <b>Did Not Survive</b>
-using Logistic Regression</p>
-</div>
-""", unsafe_allow_html=True)
-
-# Load Dataset
-@st.cache_data
-def load_data():
-    return sns.load_dataset("titanic")
-
-df = load_data()
-
-# Keep required columns only
-df = df[["fare", "age", "survived"]]
-
-# Remove missing values
-df.dropna(inplace=True)
-
-# Dataset Preview
-st.markdown('<div class="card">', unsafe_allow_html=True)
-
-st.subheader("Dataset Preview")
-st.dataframe(df.head())
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Prepare Data
-X = df[["fare", "age"]]
-y = df["survived"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
-    test_size=0.2,
-    random_state=42
+model_path = os.path.join(
+    BASE_DIR,
+    "models",
+    "logistic_regression.pkl"
 )
 
-# Scaling
-scaler = StandardScaler()
-
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-# Train Model
-model = LogisticRegression()
-model.fit(X_train, y_train)
-
-# Predictions
-y_pred = model.predict(X_test)
-
-# Metrics
-accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred)
-recall = recall_score(y_test, y_pred)
-f1 = f1_score(y_test, y_pred)
-
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-
-# Visualization
-st.markdown('<div class="card">', unsafe_allow_html=True)
-
-st.subheader("Fare vs Age")
-
-fig, ax = plt.subplots()
-
-scatter = ax.scatter(
-    df["fare"],
-    df["age"],
-    c=df["survived"],
-    alpha=0.7
+scaler_path = os.path.join(
+    BASE_DIR,
+    "models",
+    "scaler.pkl"
 )
 
-ax.set_xlabel("Fare")
-ax.set_ylabel("Age")
+# =========================
+# LOAD MODEL
+# =========================
+model = joblib.load(model_path)
+scaler = joblib.load(scaler_path)
 
-legend1 = ax.legend(
-    *scatter.legend_elements(),
-    title="Survived"
+# =========================
+# TITLE
+# =========================
+st.title("🩺 Logistic Regression")
+st.subheader("Breast Cancer Prediction")
+
+st.write("---")
+
+# =========================
+# INPUTS
+# =========================
+radius = st.slider(
+    "Mean Radius",
+    5.0, 30.0, 14.0
 )
 
-ax.add_artist(legend1)
-
-st.pyplot(fig)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Performance
-st.markdown('<div class="card">', unsafe_allow_html=True)
-
-st.subheader("Model Performance")
-
-c1, c2 = st.columns(2)
-
-c1.metric("Accuracy", f"{accuracy:.2f}")
-c2.metric("Precision", f"{precision:.2f}")
-
-c3, c4 = st.columns(2)
-
-c3.metric("Recall", f"{recall:.2f}")
-c4.metric("F1 Score", f"{f1:.2f}")
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Confusion Matrix Display
-st.markdown('<div class="card">', unsafe_allow_html=True)
-
-st.subheader("Confusion Matrix")
-
-fig2, ax2 = plt.subplots()
-
-sns.heatmap(
-    cm,
-    annot=True,
-    fmt="d",
-    cmap="Blues",
-    ax=ax2
+texture = st.slider(
+    "Mean Texture",
+    5.0, 40.0, 20.0
 )
 
-ax2.set_xlabel("Predicted")
-ax2.set_ylabel("Actual")
-
-st.pyplot(fig2)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Model Coefficients
-st.markdown(f"""
-<div class="card">
-
-<h3>Model Intercept & Coefficients</h3>
-
-<p><b>Intercept:</b> {model.intercept_[0]:.3f}</p>
-
-<p><b>Fare Coefficient:</b> {model.coef_[0][0]:.3f}</p>
-
-<p><b>Age Coefficient:</b> {model.coef_[0][1]:.3f}</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-# Prediction Section
-st.markdown('<div class="card">', unsafe_allow_html=True)
-
-st.subheader("Predict Survival")
-
-fare = st.slider(
-    "Passenger Fare ($)",
-    float(df.fare.min()),
-    float(df.fare.max()),
-    50.0
+perimeter = st.slider(
+    "Mean Perimeter",
+    40.0, 200.0, 90.0
 )
 
-age = st.slider(
-    "Passenger Age",
-    float(df.age.min()),
-    float(df.age.max()),
-    30.0
+area = st.slider(
+    "Mean Area",
+    100.0, 2500.0, 500.0
 )
 
-input_data = pd.DataFrame(
-    [[fare, age]],
-    columns=["fare", "age"]
+smoothness = st.slider(
+    "Mean Smoothness",
+    0.05, 0.20, 0.10
 )
 
-prediction = model.predict(
-    scaler.transform(input_data)
-)[0]
+# =========================
+# INPUT DATA
+# =========================
+input_data = np.array([
+    [
+        radius,
+        texture,
+        perimeter,
+        area,
+        smoothness
+    ]
+])
 
-probability = model.predict_proba(
-    scaler.transform(input_data)
-)[0][1]
+# Remaining 25 features
+remaining_features = np.zeros((1, 25))
 
-# Output
-if prediction == 1:
-    st.markdown(
-        f'<div class="prediction-box">✅ Passenger Survived '
-        f'({probability*100:.2f}% probability)</div>',
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        f'<div class="prediction-box">❌ Passenger Did Not Survive '
-        f'({(1-probability)*100:.2f}% probability)</div>',
-        unsafe_allow_html=True
+input_data = np.concatenate(
+    [input_data, remaining_features],
+    axis=1
+)
+
+# =========================
+# SCALE INPUT
+# =========================
+input_scaled = scaler.transform(
+    input_data
+)
+
+# =========================
+# PREDICTION
+# =========================
+if st.button("Predict"):
+
+    prediction = model.predict(
+        input_scaled
+    )[0]
+
+    probability = model.predict_proba(
+        input_scaled
+    )[0]
+
+    if prediction == 1:
+        st.success("✅ Benign Tumor")
+    else:
+        st.error("⚠️ Malignant Tumor")
+
+    st.write(
+        f"Confidence: {max(probability)*100:.2f}%"
     )
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.write("---")
+st.caption(
+    "Built using Logistic Regression"
+)
