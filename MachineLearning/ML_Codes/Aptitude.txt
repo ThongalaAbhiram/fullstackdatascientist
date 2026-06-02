@@ -1,0 +1,87 @@
+Aptitude:
+
+
+Irrational Number:
+A non-terminating and non-repeating number is a decimal number that goes on forever without ending or forming a repeating pattern.
+ (√2),(√3), 4.56746..... , 985.4
+
+Ex: (⅔) - Here, 2 is less than 3, making it a proper fraction
+Ex: (7/4) - Here, 7 is greater than 4, making it an improper
+Ex: 2 (¼) - Here, 2 is the natural number, and (¼) is the proper fraction part.
+
+
+A number is divisible by 4 if the last two digits from a number divisible by 4.
+A number is divisible by 8 if the last three digits form a number divisible by 8.
+A number is divisible by 3 if the sum of its digits is divisible by 3.
+A number is divisible by 9 if the sum of its digits is divisible by 9.
+A number is divisible by 6 if it is divisible by both 2 and 3.
+A number is divisible by 12 if it is divisible by both 4 and 3.
+If a number is divisible by 7, you can check by doubling the last digit, subtracting that from the remaining part of the number, and if the result is a multiple of 7 or zero, then the original number is divisible by 7.
+
+If the difference of the sum of alternative digits of a number is divisible by 11, then that number is divisible by 11 completely.
+Sum of digits in odd places – Sum of digits in even places = 0 or a multiple of 11.
+
+Concept of Co-Prime numbers
+Co-prime numbers are pairs of numbers that don't share any common factors except for 1.
+To be considered co-prime, a set of numbers must have at least two numbers, and the only common factor between them should be 1.
+
+The Highest Common Factor (HCF) of co-prime numbers always is 1.
+The Lowest Common Multiples (LCM) of co-prime numbers always equals the product of numbers.
+
+
+Power Cycle Type:
+
+Digits 0, 1, 5, and 6:
+
+52 = 25: Unit digit is 5, the number itself.
+15 = 1: Unit digit is 1, the number itself.
+09 = 0: Unit digit is 0, the number itself.
+62 = 36: Unit digit is 6, the number itself.
+
+Digits 4 and 9:
+Both of these two digits, 4 and 9, have a cyclicity of two different digits as their unit digit.
+
+4odd = 4: If 4 is raised to the power of an odd number, the unit digit will be 4.
+4even = 6: If 4 is raised to the power of an even number, the unit digit will be 6.
+9odd = 9: If 9 is raised to the power of an odd number, the unit digit will be 9.
+9even = 1: If 9 is raised to the power of an even number, the unit digit will be 1.
+
+Digits 2, 3, 7, and 8:
+
+The cyclicity of 3 has 4 different numbers: 3, 9, 7, 1.
+The cyclicity of 7 has 4 different numbers: 7, 9, 3, 1.
+The cyclicity of 8 has 4 different numbers: 8, 4, 2, 6.
+
+
+Trailing Zeroes:
+ Count Factors of 2 and 5:
+     Determine the count of factors of 2 and 5 in the prime factorization.
+     (2*5 = 10), so every pair of factors of 2 and 5 contributes one trailing zero.
+the numbers should be divided into 2*5
+Example:
+
+  Consider the natural number 4 x 9 x 125.
+  Prime factorization: (22 x 32 x 53).
+  Count of factors of 2: 2, count of factors of 5: 3.
+  Minimum count: 2 (number of trailing zeros in 4 x 9 x 125).
+
+
+For any two numbers greater than $2$, the number with the smaller base (the one closer to $3$) will always be the larger total value.
+
+
+
+Question: Find the remainder of 17^240 when divided by 7?
+
+Solution:
+
+Simplify the Base Modulo 7:
+First, find the remainder when 17 is divided by 7.
+(17 mod 7 = 3).
+Hence, (17^240 mod 7) is equivalent to (3^240 mod 7).
+
+3^1 mod 7 =3
+
+
+
+
+

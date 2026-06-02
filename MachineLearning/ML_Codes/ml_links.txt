@@ -66,3 +66,13 @@ Stacking Regressor:
 
 https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/StackingRegressor
 https://fullstackdatascientist-zwunrmh5plrz9mjsp3pkf4.streamlit.app/
+
+CNN Cifar-10:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/CNN/cifar-10
+https://fullstackdatascientist-h4p7gapvjqxgbvothrrxz8.streamlit.app/
+
+RNN imdb:
+
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/CNN/RNN_imdb
+https://fullstackdatascientist-gf7st2w3kn44dauwuu9qdu.streamlit.app/
