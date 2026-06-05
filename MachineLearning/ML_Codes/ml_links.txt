@@ -1,22 +1,20 @@
 LinearRegression:
 
-https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/LinearRegression
-https://fullstackdatascientist-ltn2fpjmx8lnqeyzrnxebg.streamlit.app/
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/LinearRegression
+https://fullstackdatascientist-ws29zt2qrc7b35rt75zm53.streamlit.app/
 
 Logistic:
 
-https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/LogisticRegression
-https://fullstackdatascientist-o2lc6ski8qzgdjpbrrakll.streamlit.app/
-
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/LogisticRegression
+https://fullstackdatascientist-49yyk9aqw8dr5t9xkbwdrm.streamlit.app/
 Svm:
 
-https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/SVM
-https://fullstackdatascientist-wylzbd77cqpkyekdurfsj4.streamlit.app/
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Classification/SVM
+https://fullstackdatascientist-hvouc4n8emvufsvxqgtrs6.streamlit.app/
 Svm Reg:
 
-https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/SVM_Regression
-https://fullstackdatascientist-c2bvbuwjpjvmqbpkxsftlu.streamlit.app/
-
+https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/MachineLearning/ML_Codes/Supervised/Regression/SVM_Regression
+https://fullstackdatascientist-nmxfh8edvajbvcfj6h2qsp.streamlit.app/
 
 DT_regressor:
 
@@ -76,3 +74,8 @@ RNN imdb:
 
 https://github.com/ThongalaAbhiram/fullstackdatascientist/tree/main/CNN/RNN_imdb
 https://fullstackdatascientist-gf7st2w3kn44dauwuu9qdu.streamlit.app/
+
+
+
+https://supabase.com/dashboard/project/vachbvzkvvjmabomnhsb/sql/new
+anon public-  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhY2hidnprdnZqbWFib21uaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0Njg5ODMsImV4cCI6MjA5NjA0NDk4M30.sUklWj7njXyQZdEH7CN2Z3vXW6CDXhjG_pyCpn5gutM

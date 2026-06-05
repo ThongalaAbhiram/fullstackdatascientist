@@ -80,6 +80,9 @@ First, find the remainder when 17 is divided by 7.
 Hence, (17^240 mod 7) is equivalent to (3^240 mod 7).
 
 3^1 mod 7 =3
+3^2 mod 7=2 .....
+
+
 
 
 
