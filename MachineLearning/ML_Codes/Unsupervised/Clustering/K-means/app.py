@@ -61,14 +61,26 @@ df = pd.DataFrame(
 # LOAD MODEL
 # ====================================
 
+import os
+import joblib
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 model = joblib.load(
-    "models/kmeans_model.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "kmeans_model.pkl"
+    )
 )
 
 scaler = joblib.load(
-    "models/scaler.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "scaler.pkl"
+    )
 )
-
 # ====================================
 # CLUSTERING
 # ====================================
