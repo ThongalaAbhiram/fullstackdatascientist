@@ -60,13 +60,25 @@ df = pd.DataFrame(
 # ====================================
 # LOAD MODEL
 # ====================================
+import os
+import joblib
 
-gmm = joblib.load(
-    "models/gmm_model.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "gmm_model.pkl"
+    )
 )
 
 scaler = joblib.load(
-    "models/scaler.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "scaler.pkl"
+    )
 )
 
 # ====================================

@@ -64,13 +64,27 @@ df["target"] = iris.target
 # LOAD MODEL
 # =====================================
 
-pca = joblib.load(
-    "models/pca_model.pkl"
+import os
+import joblib
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "pca_model.pkl"
+    )
 )
 
 scaler = joblib.load(
-    "models/scaler.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "scaler.pkl"
+    )
 )
+
 
 # =====================================
 # PCA

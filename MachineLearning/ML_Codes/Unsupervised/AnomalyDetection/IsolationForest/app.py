@@ -61,13 +61,27 @@ df = pd.DataFrame(
 # LOAD MODEL
 # =====================================
 
+import os
+import joblib
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 model = joblib.load(
-    "models/isolation_forest.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "isolation_forest.pkl"
+    )
 )
 
 scaler = joblib.load(
-    "models/scaler.pkl"
+    os.path.join(
+        BASE_DIR,
+        "models",
+        "scaler.pkl"
+    )
 )
+
 
 # =====================================
 # PREDICTIONS
