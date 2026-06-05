@@ -45,7 +45,7 @@ X_scaled = scaler.fit_transform(X)
 # GMM MODEL
 # ====================================
 
-gmm = GaussianMixture(
+gmm=GaussianMixture(
     n_components=3,
     covariance_type="full",
     random_state=42
